@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------------------------
 //
-// File Name:	LivesText.cs
+// File Name:	EndText.cs
 // Author(s):	Gavin Cooper (gavin.cooper@digipen.edu)
 // Project:	    Cage
 // Course:	    WANIC VGP2
@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class LivesText : MonoBehaviour
+public class EndText : MonoBehaviour
 {
     // Update text
     // Params:

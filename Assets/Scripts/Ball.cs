@@ -20,6 +20,7 @@ public class Ball : MonoBehaviour
     [Tooltip("The delay before the ball starts moving")]
     public float ballMoveDelay = 0.5f;
 
+    private KeyCode moveBallKey = KeyCode.Space;
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +28,17 @@ public class Ball : MonoBehaviour
         StartCoroutine("DelayVelocity");
     }
 
-    // Coroutitine so delay can be added, adds velocity 
-    private IEnumerable DelayVelocity()
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(moveBallKey))
+        {
+            StartCoroutine("DelayVelocity");
+        }
+    }
+
+        // Coroutitine so delay can be added, adds velocity 
+        private IEnumerator DelayVelocity()
     {
         yield return new WaitForSeconds(ballMoveDelay);
 
@@ -40,10 +50,10 @@ public class Ball : MonoBehaviour
         GetComponent<Rigidbody2D>().AddForce(forceAdded);
     }
 
-    // Destroy self when collide with trigger
-    private void OnTriggerEnter2D(Collider2D collision)
+    // Destroy when off screen
+    private void OnBecameInvisible()
     {
-        FindObjectOfType<LivesText>().DecreaseLives();
+        FindObjectOfType<LevelController>().DecreaseLives();
         Destroy(gameObject);
     }
 }

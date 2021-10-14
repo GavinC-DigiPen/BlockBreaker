@@ -12,11 +12,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Brick : MonoBehaviour
 {
-    private Vector2 healthRange = new Vector2(1, 3);
+    [Tooltip("The name of the scene that will be loaded when all bricks broken")]
+    public string endScene = "EndScreen";
+    [Tooltip("Do these bricks give score, when destroyed does it move to new scene")]
+    public bool scoring = true;
 
+    private Vector2 healthRange = new Vector2(1, 3);
     private int health;
 
     // Start is called before the first frame update
@@ -62,7 +67,20 @@ public class Brick : MonoBehaviour
         health--;
         if (health <= 0)
         {
-            FindObjectOfType<ScoreText>().IncreaseScore();
+            if (scoring)
+            {
+                LevelController scoreScript = FindObjectOfType<LevelController>();
+                if (scoreScript)
+                {
+                    scoreScript.IncreaseScore();
+                }
+
+                Brick[] numberOfBricks = FindObjectsOfType<Brick>();
+                if (numberOfBricks.Length <= 1)
+                {
+                    SceneManager.LoadScene(endScene);
+                }
+            }
             Destroy(gameObject);
         }
         else

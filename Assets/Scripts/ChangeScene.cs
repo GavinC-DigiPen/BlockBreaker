@@ -18,10 +18,21 @@ public class ChangeScene : MonoBehaviour
 {
     [Tooltip("The name of the scene that should be loaded")]
     public string sceneToLoad;
+    [Tooltip("Reset LevelController")]
+    public bool resetLevelController = false;
 
     // Changes the scene
     public void LoadScene()
     {
-        SceneManager.LoadScene("sceneToLoad");
+        SceneManager.LoadScene(sceneToLoad);
+
+        if (resetLevelController)
+        {
+            LevelController obj = FindObjectOfType<LevelController>();
+            if (obj)
+            {
+                obj.Reset();
+            }
+        }
     }
 }

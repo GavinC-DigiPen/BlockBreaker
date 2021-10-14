@@ -16,18 +16,11 @@ using TMPro;
 
 public class ScoreText : MonoBehaviour
 {
-    private int score = 0;
-
-    // Start is called before the first frame update
-    void Start()
+    // Update text
+    // Params:
+    //  textInput: the text that the TMP will be set to
+    public void UpdateText(string textInput)
     {
-        GetComponent<TextMeshProUGUI>().text = " Score: " + score;
-    }
-    
-    // Increase the score and changes the text
-    public void IncreaseScore()
-    {
-        score++;
-        GetComponent<TextMeshProUGUI>().text = " Score: " + score;
+        GetComponent<TextMeshProUGUI>().text = textInput;
     }
 }
